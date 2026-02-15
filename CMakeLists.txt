@@ -7,6 +7,10 @@ set(DRIVERS_DIR "drivers/STM8S_StdPeriph_Driver/src")
 set(DRIVER_SOURCES
   ${DRIVERS_DIR}/stm8s_clk.c
   ${DRIVERS_DIR}/stm8s_gpio.c
+  ${DRIVERS_DIR}/stm8s_spi.c
+  ${DRIVERS_DIR}/stm8s_tim1.c
+  ${DRIVERS_DIR}/stm8s_tim2.c
+  ${DRIVERS_DIR}/stm8s_tim4.c
 )
 
 # hal
@@ -21,10 +25,16 @@ set(USER_SOURCES
   # ${USER_DIR}/system.c
 )
 
+set(USER_DIR "user")
+set(USER_SOURCES
+  # ${USER_DIR}/system.c
+)
+
 
 # 生成可执行文件（.ihx格式，用于烧录）
 add_executable(${PROJECT_NAME}
   main.c
+  stm8s_it.c
   ${DRIVER_SOURCES}
   ${HAL_SOURCES}
   ${USER_SOURCES}

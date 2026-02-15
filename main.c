@@ -26,22 +26,51 @@ GPIOF->DDR |= GPIO_PIN_4; \
 }
 
 
-static void delay(uint32_t t)
+void delay_ms(const uint32_t t)
 {
-    while(t--);
+  uint32_t tt = 850;
+  while (tt--) {
+    uint32_t st = t;
+    while(st--);
+  }
 }
 
 
-int main(int argc, char** argv)
+int main()
 {
 
   CONFIG_UNUSED_PINS_STM8S001;
 
-  systemConfig();
+  SystemConfig();
 
+  LightenRedLED(ENABLE);
+  uint32_t start_blocking_time = 10 * 1000;
+  // BlockingDelayMs(start_blocking_time);
+  delay_ms(start_blocking_time);
 
+  SetMotor(DISABLE);
+  uint32_t motor_worktime_max = 1 * 60 * 1000;
+  uint32_t motor_worktime = 0;
   while(1) {
-    delay(3000);
+
+    if (IsTouch()) {
+      if (motor_worktime == 0) {
+        SetMotor(ENABLE);
+        motor_worktime = motor_worktime_max;
+      } else {
+        SetMotor(DISABLE);
+        motor_worktime = 0;
+      }
+      delay_ms(3);
+    }
+
+    if (motor_worktime > 0) {
+      if (--motor_worktime == 0) {
+        SetMotor(DISABLE);
+      }
+    }
+
+    delay_ms(1);
   }
 }
 
