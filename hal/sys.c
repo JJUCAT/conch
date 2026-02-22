@@ -10,16 +10,14 @@
  */
 
 
-
+/* Includes ------------------------------------------------------------------*/
 #include "include/sys.h"
+#include "include/led.h"
+#include "include/uart.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define LED_PORT GPIOB
-#define LED_PIN GPIO_PIN_4
 
-#define USART_PORT GPIOB
-#define USART_TX_PIN GPIO_PIN_5
 
 #define TOUCH_PORT GPIOC
 #define TOUCH_PIN GPIO_PIN_5
@@ -52,8 +50,8 @@ void CLKInitialize()
   CLK_HSICmd(ENABLE);
   CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
   CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
-  CLK_PeripheralClockConfig(CLK_PERIPHERAL_SPI, DISABLE);
-  CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER1, DISABLE);
+  CLK_PeripheralClockConfig(CLK_PERIPHERAL_UART1, DISABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER1, DISABLE);
   // CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER2, DISABLE);
   // CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, ENABLE);
 }
@@ -65,8 +63,6 @@ void GPIOInitialize()
   GPIO_Init(TOUCH_PORT, TOUCH_PIN, GPIO_MODE_IN_FL_NO_IT);
   GPIO_Init(TOUCH_PORT, TOUCH_PIN0, GPIO_MODE_IN_FL_NO_IT);
   GPIO_Init(TOUCH_PORT, TOUCH_PIN1, GPIO_MODE_IN_FL_NO_IT);
-
-  LightenRedLED(ENABLE);
 
 }
 
@@ -98,11 +94,6 @@ void TIM_ResetConfig(void)
 }
 
 
-void SPI_ResetConfig(void)
-{
-  SPI_Cmd(DISABLE);
-}
-
 
 void TimingDelay_Decrement(void)
 {
@@ -117,7 +108,10 @@ void SystemConfig()
   CLKInitialize();
   GPIOInitialize();
 
-  SPI_ResetConfig();
+  #ifdef DEBUG_UART1
+  DebugUsartConfig(ENABLE);
+  #endif
+
   TIM_ResetConfig();
   // TIM4_Config();
 
@@ -125,14 +119,6 @@ void SystemConfig()
 }
 
 
-void LightenRedLED(const FunctionalState state)
-{
-  if (ENABLE == state) {         
-    GPIO_Init(LED_PORT, LED_PIN, GPIO_MODE_OUT_OD_HIZ_SLOW);
-  } else {
-    GPIO_Init(LED_PORT, LED_PIN, GPIO_MODE_OUT_OD_LOW_SLOW);
-  }
-}
 
 
 bool IsTouch()

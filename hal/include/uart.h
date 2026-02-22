@@ -1,9 +1,9 @@
 /**
- * @file sys.h
+ * @file usart.h
  * @author jucat (lmr2887@163.com)
  * @brief 
  * @version 0.1
- * @date 2026-02-13
+ * @date 2026-02-22
  * 
  * @copyright Copyright (c) 2026 jucat
  * 
@@ -11,16 +11,17 @@
 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef HAL_SYS_H
-#define HAL_SYS_H
+#ifndef HAL_UART_H
+#define HAL_UART_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+
 /* Includes ------------------------------------------------------------------*/
-#include <stdio.h>
 #include "stm8s.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -39,44 +40,34 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
-#define DEBUG_UART1
+#ifdef _SDCC_
+
+int putchar (int c);
+int getchar (void);
+
+#endif
 
 
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
-/**
- * @brief 系统配置
- */
-void SystemConfig();
+
 
 
 /**
- * @brief 是否触摸了电容按键
- * @return true 
- * @return false 
- */
-bool IsTouch();
-
-
-/**
- * @brief 阻塞等待，uint:ms
- * @param ms 
- */
-void BlockingDelayMs(const uint32_t ms);
-
-
-/**
- * @brief 控制电机开关
+ * @brief 调试串口配置
+ * @attention 该配置会修改 pin1 脚 PD6 复用为 UART1_RX 功能
  * @param state 
- *        @ENABLE: 开电机
- *        @DISABLE: 关电机
+ *        @ENABLE: 使用 UART 功能
+ *        @DISABLE: 关闭 UART 功能
  */
-void SetMotor(const FunctionalState state);
+void DebugUsartConfig(const FunctionalState state);
+
+
 
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // HAL_SYS_H
+#endif // HAL_UART_H
