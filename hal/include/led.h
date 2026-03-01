@@ -24,6 +24,12 @@ extern "C" {
 
 
 /**
+ * @brief led 配置
+ */
+void RedLEDConfig();
+
+
+/**
  * @brief 红色 LED 控制
  * @param state
  *        @ENABLE: 点亮

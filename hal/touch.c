@@ -1,9 +1,9 @@
 /**
- * @file sys.c
+ * @file touch.c
  * @author jucat (lmr2887@163.com)
  * @brief 
  * @version 0.1
- * @date 2026-02-13
+ * @date 2026-03-01
  * 
  * @copyright Copyright (c) 2026 jucat
  * 
@@ -11,42 +11,37 @@
 
 
 /* Includes ------------------------------------------------------------------*/
-#include "include/sys.h"
-#include "include/led.h"
-#include "include/motor.h"
+#include "include/base.h"
 #include "include/touch.h"
-#include "include/uart.h"
-#include "include/battery.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+#define TOUCH_PORT GPIOB
+#define TOUCH_PIN GPIO_PIN_4
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+static __IO FunctionalState g_touch_state = DISABLE;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-void CLKInitialize()
-{
-  CLK_DeInit();
-  CLK_HSICmd(ENABLE);
-  CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
-  CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
-}
-
-
-void DevicesInitialize()
-{
-  RedLEDConfig();
-  MotorConfig();
-  TouchConfig();
-  DebugUARTConfig();
-  // BatteryConfig();
-}
-
-
 /* Public functions ----------------------------------------------------------*/
-void SystemConfig()
+
+void TouchConfig()
 {
-  CLKInitialize();
-  DevicesInitialize();
+  GPIO_Init(TOUCH_PORT, TOUCH_PIN, GPIO_MODE_IN_FL_NO_IT);
 }
 
+
+bool IsTouch()
+{
+  if (GPIO_ReadInputPin(TOUCH_PORT, TOUCH_PIN)) {
+    TimerDelayMs(50);
+    if (GPIO_ReadInputPin(TOUCH_PORT, TOUCH_PIN)) {
+      g_touch_state = ENABLE;
+      return TRUE;
+    }
+  }
+
+  g_touch_state = DISABLE;
+  return FALSE;
+}

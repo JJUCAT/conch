@@ -11,8 +11,11 @@
 
 
 #include "stm8s_conf.h"
+#include "stm8s_it.h"
+#include "hal/include/base.h"
 #include "hal/include/sys.h"
 #include "hal/include/led.h"
+#include "hal/include/motor.h"
 #include "hal/include/uart.h"
 
 // 配置引脚默认模式
@@ -27,55 +30,23 @@ GPIOF->DDR |= GPIO_PIN_4; \
 }
 
 
-void delay_ms(const uint32_t t)
-{
-  uint32_t tt = 850;
-  while (tt--) {
-    uint32_t st = t;
-    while(st--);
-  }
-}
-
-
 int main()
 {
-
   CONFIG_UNUSED_PINS_STM8S001;
 
-  SystemConfig();
-
   // 延迟配置 SWIM 引脚
-  uint32_t start_blocking_time = 10 * 1000;
-  // BlockingDelayMs(start_blocking_time);
-  delay_ms(start_blocking_time);
+  uint32_t start_blocking_time = 5 * 1000;
+  DelayMs(start_blocking_time);
 
-  // SetMotor(DISABLE);
-  // uint32_t motor_worktime_max = 1 * 60 * 1000;
-  // uint32_t motor_worktime = 0;
+  // 系统配置
+  SystemConfig();
+  BaseConfig();
+  enableInterrupts();
 
   while(1) {
-
-    // if (IsTouch()) {
-    //   if (motor_worktime == 0) {
-    //     SetMotor(ENABLE);
-    //     motor_worktime = motor_worktime_max;
-    //   } else {
-    //     SetMotor(DISABLE);
-    //     motor_worktime = 0;
-    //   }
-    //   delay_ms(3);
-    // }
-
-    // if (motor_worktime > 0) {
-    //   if (--motor_worktime == 0) {
-    //     SetMotor(DISABLE);
-    //   }
-    // }
-
-    printf("\n\r test \n\r");
+    printf("hello stm8s\r\n");  
     ToggleRedLED();
-    // delay_ms(1000);
-    delay_ms(1);
+    TimerDelayMs(1000);
   }
 }
 

@@ -1,9 +1,9 @@
 /**
- * @file usart.h
+ * @file touch.h
  * @author jucat (lmr2887@163.com)
  * @brief 
  * @version 0.1
- * @date 2026-02-22
+ * @date 2026-03-01
  * 
  * @copyright Copyright (c) 2026 jucat
  * 
@@ -11,17 +11,15 @@
 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef HAL_UART_H
-#define HAL_UART_H
+#ifndef HAL_TOUCH_H
+#define HAL_TOUCH_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s.h"
-#include "stdio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -41,32 +39,24 @@ extern "C" {
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
 
-#ifdef _RAISONANCE_
-#define PUTCHAR_PROTOTYPE int putchar (char c)
-#define GETCHAR_PROTOTYPE int getchar (void)
-#elif defined (_COSMIC_)
-#define PUTCHAR_PROTOTYPE char putchar (char c)
-#define GETCHAR_PROTOTYPE char getchar (void)
-#elif defined (_SDCC_)
-#define PUTCHAR_PROTOTYPE int putchar (int c)
-#define GETCHAR_PROTOTYPE int getchar (void)
-#else /* _IAR_ */
-#define PUTCHAR_PROTOTYPE int putchar (int c)
-#define GETCHAR_PROTOTYPE int getchar (void)
-#endif /* _RAISONANCE_ */
-
 
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
 
+/**
+ * @brief 触摸配置
+ */
+void TouchConfig();
 
 
 /**
- * @brief 调试串口配置
+ * @brief 是否触摸
+ * @attention 带防抖滤波
+ * @return true 有触摸
+ * @return false 无触摸
  */
-void DebugUARTConfig();
-
+bool IsTouch();
 
 
 
@@ -74,4 +64,4 @@ void DebugUARTConfig();
 }
 #endif
 
-#endif // HAL_UART_H
+#endif // HAL_TOUCH_H

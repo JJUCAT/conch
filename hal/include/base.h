@@ -1,9 +1,9 @@
 /**
- * @file usart.h
+ * @file base.h
  * @author jucat (lmr2887@163.com)
  * @brief 
  * @version 0.1
- * @date 2026-02-22
+ * @date 2026-03-01
  * 
  * @copyright Copyright (c) 2026 jucat
  * 
@@ -11,17 +11,16 @@
 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef HAL_UART_H
-#define HAL_UART_H
+#ifndef HAL_BASE_H
+#define HAL_BASE_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-
 /* Includes ------------------------------------------------------------------*/
+#include <stdio.h>
 #include "stm8s.h"
-#include "stdio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -41,37 +40,34 @@ extern "C" {
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
 
-#ifdef _RAISONANCE_
-#define PUTCHAR_PROTOTYPE int putchar (char c)
-#define GETCHAR_PROTOTYPE int getchar (void)
-#elif defined (_COSMIC_)
-#define PUTCHAR_PROTOTYPE char putchar (char c)
-#define GETCHAR_PROTOTYPE char getchar (void)
-#elif defined (_SDCC_)
-#define PUTCHAR_PROTOTYPE int putchar (int c)
-#define GETCHAR_PROTOTYPE int getchar (void)
-#else /* _IAR_ */
-#define PUTCHAR_PROTOTYPE int putchar (int c)
-#define GETCHAR_PROTOTYPE int getchar (void)
-#endif /* _RAISONANCE_ */
-
-
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
-
+/**
+ * @brief 系统基础配置
+ * @details 延迟函数
+ */
+void BaseConfig();
 
 
 /**
- * @brief 调试串口配置
+ * @brief 定时器延迟
+ * @attention 精确延迟
+ * @param ms 
  */
-void DebugUARTConfig();
+void TimerDelayMs(const uint32_t ms);
 
 
+/**
+ * @brief 延迟
+ * @attention 粗野延迟
+ * @param ms 
+ */
+void DelayMs(uint32_t t);
 
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // HAL_UART_H
+#endif // HAL_BASE_H

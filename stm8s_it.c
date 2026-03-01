@@ -485,11 +485,11 @@ INTERRUPT_HANDLER(TIM6_UPD_OVF_TRG_IRQHandler, 23)
   * @param  None
   * @retval None
   */
- INTERRUPT_HANDLER(TIM4_UPD_OVF_IRQHandler, 23)
- {
+INTERRUPT_HANDLER(TIM4_UPD_OVF_IRQHandler, 23)
+{
   TimingDelay_Decrement();
   TIM4_ClearITPendingBit(TIM4_IT_UPDATE);
- }
+}
 #endif /* (STM8S903) || (STM8AF622x)*/
 
 /**
