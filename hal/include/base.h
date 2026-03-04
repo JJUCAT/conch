@@ -39,6 +39,10 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
+#define VDDA 3300UL // VDDA 电压
+#define VREF VDDA // ADC 参考电压
+#define VREF_LOW 2750UL // ADC 最低电压
+#define ADC_RES 1024UL // ADC 分辨率
 
 /* USER CODE END EM */
 

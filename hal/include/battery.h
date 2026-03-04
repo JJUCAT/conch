@@ -50,10 +50,11 @@ void BatteryConfig();
 
 
 /**
- * @brief 获取电池电压
- * @return float 
+ * @brief 获取电池电压，uint:mV
+ * @details 单片机空间很小，尽量不使用浮点数
+ * @return uint16_t
  */
-float GetBatteryV();
+uint32_t GetBatteryV();
 
 
 

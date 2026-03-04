@@ -17,6 +17,8 @@
 #include "hal/include/led.h"
 #include "hal/include/motor.h"
 #include "hal/include/uart.h"
+#include "hal/include/battery.h"
+
 
 // 配置引脚默认模式
 #define CONFIG_UNUSED_PINS_STM8S001 \
@@ -35,7 +37,7 @@ int main()
   CONFIG_UNUSED_PINS_STM8S001;
 
   // 延迟配置 SWIM 引脚
-  uint32_t start_blocking_time = 5 * 1000;
+  uint32_t start_blocking_time = 3 * 1000;
   DelayMs(start_blocking_time);
 
   // 系统配置
@@ -44,8 +46,10 @@ int main()
   enableInterrupts();
 
   while(1) {
-    printf("hello stm8s\r\n");  
-    ToggleRedLED();
+    // printf("battery v: %d\r\n", GetBatteryV());
+    if (GetBatteryV() > 3000) LightenRedLED(ENABLE);
+    else LightenRedLED(DISABLE);
+    // ToggleRedLED();
     TimerDelayMs(1000);
   }
 }

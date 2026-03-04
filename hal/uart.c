@@ -21,7 +21,7 @@
 #define UART_TX_PIN GPIO_PIN_3
 
 #define OPTION_BYTE_AFR_ADDRESS_OFFSET 0x03
-#define UART1_AFR 0x01
+#define UART1_AFR 0x03
 
 #define DEBUG_UART_BAUDRATE 9600
 /* Private macro -------------------------------------------------------------*/

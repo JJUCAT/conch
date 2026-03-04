@@ -29,6 +29,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s_it.h"
+#include "uart.h"
 
 /** @addtogroup Template_Project
   * @{
@@ -40,6 +41,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 extern void TimingDelay_Decrement(void);
+extern void UpdateBatteryADC(const uint16_t adc_v);
 /* Private functions ---------------------------------------------------------*/
 /* Public functions ----------------------------------------------------------*/
 
@@ -464,6 +466,13 @@ INTERRUPT_HANDLER(I2C_IRQHandler, 19)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+    printf("adc1irq, %x\r\n", ADC1->CSR);
+    ADC1_ClearITPendingBit(ADC1_IT_EOC);
+    if (SET == ADC1_GetITStatus(ADC1_IT_EOC)) {
+      UpdateBatteryADC(ADC1_GetConversionValue());
+      ADC1_ClearITPendingBit(ADC1_IT_EOC);
+    }
+
  }
 #endif /* (STM8S208) || (STM8S207) || (STM8AF52Ax) || (STM8AF62Ax) */
 
