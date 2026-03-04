@@ -38,7 +38,7 @@ void DevicesInitialize()
   RedLEDConfig();
   MotorConfig();
   TouchConfig();
-  // DebugUARTConfig();
+  DebugUARTConfig();
   BatteryConfig();
 }
 

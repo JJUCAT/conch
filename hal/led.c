@@ -17,10 +17,9 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define LED_PORT GPIOC
-#define LED_PIN GPIO_PIN_6
-#define SWIM_PORT GPIOD
-#define SWIM_PIN GPIO_PIN_1
+#define LED_PORT GPIOA
+#define LED_PIN GPIO_PIN_3
+
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -33,9 +32,7 @@ static __IO FunctionalState g_red_led_state = DISABLE;
 
 void RedLEDConfig()
 {
-  GPIO_Init(GPIOD, GPIO_PIN_3, GPIO_MODE_IN_FL_NO_IT);
-  GPIO_Init(GPIOD, GPIO_PIN_5, GPIO_MODE_IN_FL_NO_IT);
-  GPIO_Init(SWIM_PORT, SWIM_PIN, GPIO_MODE_IN_FL_NO_IT);
+  GPIO_Init(GPIOB, GPIO_PIN_5, GPIO_MODE_IN_FL_NO_IT);
   LightenRedLED(DISABLE);
 }
 

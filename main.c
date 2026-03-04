@@ -46,10 +46,9 @@ int main()
   enableInterrupts();
 
   while(1) {
-    // printf("battery v: %d\r\n", GetBatteryV());
+    printf("battery v: %lu\r\n", GetBatteryV());
     if (GetBatteryV() > 3000) LightenRedLED(ENABLE);
     else LightenRedLED(DISABLE);
-    // ToggleRedLED();
     TimerDelayMs(1000);
   }
 }

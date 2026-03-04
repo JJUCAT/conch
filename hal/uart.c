@@ -17,8 +17,10 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define UART_PORT GPIOA
-#define UART_TX_PIN GPIO_PIN_3
+#define UART_PORT GPIOD
+#define UART_TX_PIN GPIO_PIN_5
+#define SWIM_PORT GPIOD
+#define SWIM_PIN GPIO_PIN_1
 
 #define OPTION_BYTE_AFR_ADDRESS_OFFSET 0x03
 #define UART1_AFR 0x03
@@ -31,7 +33,9 @@
 
 void GPIOConfig()
 {
-  GPIO_Init(GPIOB, GPIO_PIN_5, GPIO_MODE_IN_FL_NO_IT);
+  GPIO_Init(GPIOD, GPIO_PIN_3, GPIO_MODE_IN_FL_NO_IT);
+  GPIO_Init(GPIOD, GPIO_PIN_5, GPIO_MODE_IN_FL_NO_IT);
+  GPIO_Init(SWIM_PORT, SWIM_PIN, GPIO_MODE_IN_FL_NO_IT);
   GPIO_Init(UART_PORT, UART_TX_PIN, GPIO_MODE_OUT_PP_LOW_FAST);
 }
 
@@ -63,7 +67,7 @@ void UARTConfig()
 void DebugUARTConfig()
 {
   GPIOConfig();
-  UARTOptionBytesConfig();
+  // UARTOptionBytesConfig();
   UARTConfig();
 }
 
