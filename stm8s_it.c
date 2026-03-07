@@ -41,6 +41,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 extern void TimingDelay_Decrement(void);
+extern void TimingAlarm_Decrement(void);
 extern void UpdateBatteryADC(const uint16_t adc_v);
 /* Private functions ---------------------------------------------------------*/
 /* Public functions ----------------------------------------------------------*/
@@ -497,6 +498,7 @@ INTERRUPT_HANDLER(TIM6_UPD_OVF_TRG_IRQHandler, 23)
 INTERRUPT_HANDLER(TIM4_UPD_OVF_IRQHandler, 23)
 {
   TimingDelay_Decrement();
+  TimingAlarm_Decrement();
   TIM4_ClearITPendingBit(TIM4_IT_UPDATE);
 }
 #endif /* (STM8S903) || (STM8AF622x)*/

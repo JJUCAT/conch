@@ -43,6 +43,8 @@ extern "C" {
 #define VREF VDDA // ADC 参考电压
 #define VREF_LOW 2750UL // ADC 最低电压
 #define ADC_RES 1024UL // ADC 分辨率
+#define TIMER_SEC 1000UL // 定时器 1 秒
+#define TIMER_MIN 60000UL // 定时器 1 分钟
 
 /* USER CODE END EM */
 
@@ -60,6 +62,21 @@ void BaseConfig();
  * @param ms 
  */
 void TimerDelayMs(const uint32_t ms);
+
+
+/**
+ * @brief 设置闹钟，延迟 ms 秒到时
+ * @param ms 
+ */
+void TimerSetAlarmMs(const uint32_t ms);
+
+
+/**
+ * @brief 定时器闹钟到时
+ * @return true 
+ * @return false 
+ */
+bool TimerAlarm();
 
 
 /**

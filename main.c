@@ -10,6 +10,7 @@
  */
 
 
+/* Includes ------------------------------------------------------------------*/
 #include "stm8s_conf.h"
 #include "stm8s_it.h"
 #include "hal/include/base.h"
@@ -18,6 +19,11 @@
 #include "hal/include/motor.h"
 #include "hal/include/uart.h"
 #include "hal/include/battery.h"
+
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+
+#define MOTOR_WORKTIME 5*TIMER_MIN // 电机工作时间
 
 
 // 配置引脚默认模式
@@ -46,9 +52,23 @@ int main()
   enableInterrupts();
 
   while(1) {
-    printf("battery v: %lu\r\n", GetBatteryV());
-    if (GetBatteryV() > 3000) LightenRedLED(ENABLE);
+    uint32_t battery_v = GetBatteryV();
+    if (battery_v < 2700) LightenRedLED(ENABLE);
     else LightenRedLED(DISABLE);
+
+    if (TRUE == IsTouch()) {
+      if (TRUE == IsMotorRunning()) {
+        SetMotorState(DISABLE);
+      } else {
+        SetMotorState(ENABLE);
+        TimerSetAlarmMs(MOTOR_WORKTIME);
+      }
+    }
+    
+    if (TRUE == TimerAlarm() && TRUE == IsMotorRunning()) {
+      SetMotorState(DISABLE);
+    }
+
     TimerDelayMs(1000);
   }
 }

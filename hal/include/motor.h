@@ -59,6 +59,12 @@ void MotorConfig();
 void SetMotorState(const FunctionalState state);
 
 
+/**
+ * @brief 电机是否在工作
+ * @return true 
+ * @return false 
+ */
+bool IsMotorRunning();
 
 #ifdef __cplusplus
 }

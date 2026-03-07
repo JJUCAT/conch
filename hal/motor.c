@@ -42,3 +42,9 @@ void SetMotorState(const FunctionalState state)
     GPIO_Init(MOTOR_PORT, MOTOR_PIN, GPIO_MODE_OUT_PP_LOW_SLOW);
   }
 }
+
+
+bool IsMotorRunning()
+{
+  return ENABLE == g_motor_state;
+}

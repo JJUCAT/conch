@@ -35,10 +35,10 @@ void CLKInitialize()
 
 void DevicesInitialize()
 {
+  DebugUARTConfig();
   RedLEDConfig();
   MotorConfig();
   TouchConfig();
-  DebugUARTConfig();
   BatteryConfig();
 }
 

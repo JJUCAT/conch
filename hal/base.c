@@ -23,7 +23,7 @@
 
 // 定时器定时计数器
 __IO uint32_t g_timer_delay = 0;
-
+__IO uint32_t g_timer_alarm = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -57,6 +57,16 @@ void TimingDelay_Decrement(void)
 }
 
 
+/**
+ * @brief 定时器闹钟计数器增减
+ */
+void TimingAlarm_Decrement(void)
+{
+  if (g_timer_alarm != 0x00)
+    g_timer_alarm--;
+}
+
+
 /* Public functions ----------------------------------------------------------*/
 void BaseConfig()
 {
@@ -70,6 +80,18 @@ void TimerDelayMs(const uint32_t ms)
 {
   g_timer_delay = ms;
   while (g_timer_delay != 0);
+}
+
+
+void TimerSetAlarmMs(const uint32_t ms)
+{
+  g_timer_alarm = ms;
+}
+
+
+bool TimerAlarm()
+{
+  return g_timer_alarm == 0;
 }
 
 
