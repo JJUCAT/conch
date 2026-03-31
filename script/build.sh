@@ -3,9 +3,9 @@
 set -e # 出错立即退出
 
 SCRIPT_DIR=$(cd "$(dirname "$0")"; pwd)
-PROJECT_ROOT=$(cd "$SCRIPT_DIR/../.."; pwd)
-CMAKE_DIR="$PROJECT_ROOT/src"
-BUILD_DIR=$PROJECT_ROOT/build
+PROJECT_ROOT=$(cd "$SCRIPT_DIR/.."; pwd)
+CMAKE_DIR="$PROJECT_ROOT/"
+BUILD_DIR=$PROJECT_ROOT/../build
 
 
 echo "================================"

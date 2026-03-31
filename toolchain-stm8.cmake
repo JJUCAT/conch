@@ -1,3 +1,5 @@
+message(STATUS "Using STM8 toolchain")
+
 # 交叉编译的目标系统
 # 常见参数 @Linux @Windows @Generic 裸机mcu @BareMetal 新版裸机
 set(CMAKE_SYSTEM_NAME Generic)

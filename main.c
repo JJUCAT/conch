@@ -19,6 +19,7 @@
 #include "hal/include/motor.h"
 #include "hal/include/uart.h"
 #include "hal/include/battery.h"
+#include "hal/include/touch.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
