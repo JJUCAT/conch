@@ -24,7 +24,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 
-#define MOTOR_WORKTIME 5*TIMER_MIN // 电机工作时间
+#define MOTOR_WORKTIME 1*TIMER_MIN // 电机工作时间
 
 
 // 配置引脚默认模式
@@ -44,29 +44,40 @@ int main()
   CONFIG_UNUSED_PINS_STM8S001;
 
   // 延迟配置 SWIM 引脚
-  uint32_t start_blocking_time = 3 * 1000;
-  DelayMs(start_blocking_time);
+  uint32_t loop_delay = 100;
+  uint32_t blocking_time = 5 * 1000;
+  uint32_t delay_counter = 0;
+  while(delay_counter < blocking_time) {
+    delay_counter += loop_delay;
+    ToggleRedLED();
+    DelayMs(loop_delay);
+  }
 
   // 系统配置
   SystemConfig();
   BaseConfig();
   enableInterrupts();
 
+  printf("start task\n");
   while(1) {
     uint32_t battery_v = GetBatteryV();
     if (battery_v < 2700) LightenRedLED(ENABLE);
     else LightenRedLED(DISABLE);
 
     if (TRUE == IsTouch()) {
+      printf("touch\n");
       if (TRUE == IsMotorRunning()) {
+        printf("disable motor\n");
         SetMotorState(DISABLE);
       } else {
+        printf("enable motor\n");
         SetMotorState(ENABLE);
         TimerSetAlarmMs(MOTOR_WORKTIME);
       }
     }
     
     if (TRUE == TimerAlarm() && TRUE == IsMotorRunning()) {
+      printf("time is over\n");
       SetMotorState(DISABLE);
     }
 

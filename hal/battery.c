@@ -19,8 +19,6 @@
 #define BATTERY_V_PORT GPIOD
 #define BATTERY_V_PIN GPIO_PIN_6
 
-#define TIM4_PERIOD 124
-
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static __IO uint16_t g_adc_value = 0;
@@ -66,6 +64,6 @@ uint32_t GetBatteryV()
   uint16_t adc_value = ADC1_GetConversionValue();
   ADC1_ClearFlag(ADC1_FLAG_EOC);
   uint32_t v = VREF * adc_value / ADC_RES;
-  // uint32_t v = (uint16_t)adc_value;
+  v = v * 2; // 根据原理图计算
   return v;
 }

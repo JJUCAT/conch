@@ -24,6 +24,7 @@
 // 定时器定时计数器
 __IO uint32_t g_timer_delay = 0;
 __IO uint32_t g_timer_alarm = 0;
+__IO bool g_timer_alarm_work = FALSE;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -86,19 +87,24 @@ void TimerDelayMs(const uint32_t ms)
 void TimerSetAlarmMs(const uint32_t ms)
 {
   g_timer_alarm = ms;
+  g_timer_alarm_work = TRUE;
 }
 
 
 bool TimerAlarm()
 {
-  return g_timer_alarm == 0;
+  if (TRUE == g_timer_alarm_work && 0 == g_timer_alarm) {
+    g_timer_alarm_work = FALSE;
+    return TRUE;
+  }
+  return FALSE;
 }
 
 
 void DelayMs(uint32_t t)
 {
   while (t--) {
-    uint32_t st = 850;
+    uint32_t st = 100;
     while(st--);
   }
 }
