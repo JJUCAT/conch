@@ -15,7 +15,7 @@
 #include "include/led.h"
 #include "include/motor.h"
 #include "include/touch.h"
-#include "include/uart.h"
+// #include "include/uart.h"
 #include "include/battery.h"
 
 /* Private typedef -----------------------------------------------------------*/
@@ -35,7 +35,7 @@ void CLKInitialize()
 
 void DevicesInitialize()
 {
-  DebugUARTConfig();
+  // DebugUARTConfig();
   RedLEDConfig();
   MotorConfig();
   TouchConfig();

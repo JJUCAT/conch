@@ -17,7 +17,7 @@
 #include "hal/include/sys.h"
 #include "hal/include/led.h"
 #include "hal/include/motor.h"
-#include "hal/include/uart.h"
+// #include "hal/include/uart.h"
 #include "hal/include/battery.h"
 #include "hal/include/touch.h"
 
@@ -58,30 +58,30 @@ int main()
   BaseConfig();
   enableInterrupts();
 
-  printf("start task\n");
+  // printf("start task\n");
   while(1) {
     uint32_t battery_v = GetBatteryV();
     if (battery_v < 2700) LightenRedLED(ENABLE);
     else LightenRedLED(DISABLE);
 
     if (TRUE == IsTouch()) {
-      printf("touch\n");
+      // printf("touch\n");
       if (TRUE == IsMotorRunning()) {
-        printf("disable motor\n");
+        // printf("disable motor\n");
         SetMotorState(DISABLE);
       } else {
-        printf("enable motor\n");
+        // printf("enable motor\n");
         SetMotorState(ENABLE);
         TimerSetAlarmMs(MOTOR_WORKTIME);
       }
     }
     
     if (TRUE == TimerAlarm() && TRUE == IsMotorRunning()) {
-      printf("time is over\n");
+      // printf("time is over\n");
       SetMotorState(DISABLE);
     }
 
-    TimerDelayMs(1000);
+    TimerDelayMs(50);
   }
 }
 

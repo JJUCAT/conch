@@ -467,7 +467,7 @@ INTERRUPT_HANDLER(I2C_IRQHandler, 19)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
-    printf("adc1irq, %x\r\n", ADC1->CSR);
+
     ADC1_ClearITPendingBit(ADC1_IT_EOC);
     if (SET == ADC1_GetITStatus(ADC1_IT_EOC)) {
       UpdateBatteryADC(ADC1_GetConversionValue());

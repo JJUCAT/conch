@@ -7,8 +7,9 @@ set(DRIVERS_DIR "drivers/STM8S_StdPeriph_Driver/src")
 set(DRIVER_SOURCES
   ${DRIVERS_DIR}/stm8s_clk.c
   ${DRIVERS_DIR}/stm8s_gpio.c
-  ${DRIVERS_DIR}/stm8s_uart1.c
+  # ${DRIVERS_DIR}/stm8s_uart1.c
   ${DRIVERS_DIR}/stm8s_adc1.c
+  ${DRIVERS_DIR}/stm8s_tim1.c
   ${DRIVERS_DIR}/stm8s_tim4.c
   ${DRIVERS_DIR}/stm8s_flash.c
 )
@@ -22,7 +23,7 @@ set(HAL_SOURCES
   ${HAL_DIR}/motor.c
   ${HAL_DIR}/touch.c
   ${HAL_DIR}/battery.c
-  ${HAL_DIR}/uart.c
+  # ${HAL_DIR}/uart.c
 )
 
 # 用户功能

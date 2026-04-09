@@ -13,7 +13,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "include/base.h"
 #include "include/touch.h"
-#include "include/uart.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -35,7 +34,6 @@ void TouchOptionBytesConfig()
   uint16_t afr_address =
     OPTION_BYTE_START_PHYSICAL_ADDRESS + OPTION_BYTE_AFR_ADDRESS_OFFSET;
   uint16_t afr_data = FLASH_ReadOptionByte(afr_address);
-  printf("touch option, afr data:0x%x\r\n", afr_data);
   uint8_t data = (uint8_t)(afr_data >> 8);
   data = data | ADC_ETR_AFR4;
   FLASH_ProgramOptionByte(afr_address, data);
@@ -55,7 +53,7 @@ void TouchConfig()
 bool IsTouch()
 {
   if (GPIO_ReadInputPin(TOUCH_PORT, TOUCH_PIN)) {
-    TimerDelayMs(50);
+    TimerDelayMs(100);
     if (GPIO_ReadInputPin(TOUCH_PORT, TOUCH_PIN)) {
       g_touch_state = ENABLE;
       return TRUE;

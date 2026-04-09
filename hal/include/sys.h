@@ -19,7 +19,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include <stdio.h>
+// #include <stdio.h>
 #include "stm8s.h"
 
 /* Private includes ----------------------------------------------------------*/
