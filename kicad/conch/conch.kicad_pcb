@@ -8905,6 +8905,18 @@
 		(layer "Edge.Cuts")
 		(uuid "d1cdffe3-7ec1-4d60-83b9-6b67958e9aa1")
 	)
+	(gr_text "2026-0410\nconch-v4.0\nby jucat"
+		(at 171.55 73.1 90)
+		(layer "F.SilkS")
+		(uuid "38be1149-ffe6-4653-b6ee-352bc511d74f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
 	(segment
 		(start 158.05 90.6)
 		(end 158.05 86.37)
