@@ -53,7 +53,7 @@ void TouchConfig()
 bool IsTouch()
 {
   if (GPIO_ReadInputPin(TOUCH_PORT, TOUCH_PIN)) {
-    TimerDelayMs(100);
+    TimerDelayMs(150);
     if (GPIO_ReadInputPin(TOUCH_PORT, TOUCH_PIN)) {
       g_touch_state = ENABLE;
       return TRUE;
