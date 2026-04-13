@@ -24,7 +24,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 
-#define MOTOR_WORKTIME 1*TIMER_MIN // 电机工作时间
+#define MOTOR_WORKTIME 10*TIMER_MIN // 电机工作时间
 
 
 // 配置引脚默认模式
